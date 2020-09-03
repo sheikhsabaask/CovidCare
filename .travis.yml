@@ -22,7 +22,7 @@ android:
     - google-gdk-license-.+
 before_script:
     - chmod +x ./gradlew
-    - yes | android-sdk-linux/tools/bin/sdkmanager --licenses   
+    - yes | sdkmanager --licenses 
 Build:    
 script:  
     - ./gradlew assembleDebug
