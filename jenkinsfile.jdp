@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages{
-        stage('code pull){
+        stage('code pull'){
             steps{
                 git credentialsId: 'gitcred', url: 'https://github.com/sheikhsabaask/CovidCare.git'
             }
