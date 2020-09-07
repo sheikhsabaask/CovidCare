@@ -1,0 +1,27 @@
+pipeline{
+    agent any
+    stages{
+        stage('code pull){
+            steps{
+                git credentialsId: 'gitcred', url: 'https://github.com/sheikhsabaask/CovidCare.git'
+            }
+        }
+        stage('list'){
+            steps{
+                sh label: '', script: 'ls'
+            }
+        }
+        stage('Test'){
+            steps{
+                sh label: '', script: '''chmod +x  /gradlew 
+                ./gradlew test'''
+            }
+        }
+        stage('Build'){
+            steps{
+               sh label: '', script: '''chmod +x  /gradlew 
+               ./gradlew clean build assembleDebug '''   
+            }
+        }
+    }
+}
