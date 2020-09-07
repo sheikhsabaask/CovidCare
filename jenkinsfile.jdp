@@ -13,13 +13,13 @@ pipeline{
         }
         stage('Test'){
             steps{
-                sh label: '', script: '''sudo chmod +x  /gradlew 
+                sh label: '', script: '''chmod +x  /gradlew 
                 ./gradlew test'''
             }
         }
         stage('Build'){
             steps{
-               sh label: '', script: '''sudo chmod +x  /gradlew 
+               sh label: '', script: '''chmod +x  /gradlew 
                ./gradlew clean build assembleDebug '''   
             }
         }
