@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: 'circleci/android:latest'
+      - image: 'circleci/android:api-28-alpha'
     steps:
      - checkout
      - run:
