@@ -38,6 +38,7 @@ jobs:
            command: |
              aws --version
              yum install pip -y
+             sudo pip install awscli --force-reinstall --upgrade
              sudo pip install awscli
              curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
              unzip awscli-bundle.zip
