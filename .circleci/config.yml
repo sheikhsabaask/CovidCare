@@ -1,4 +1,6 @@
 version: 2
+orbs:
+  aws-s3: circleci/aws-s3@1.1.0
 jobs:
   build:
     working_directory: ~/code
@@ -27,3 +29,24 @@ jobs:
           path: app/build/outputs/apk/
           destination: apks/
           # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+  deploy:
+     docker: # Specify executor for running deploy job
+       - image: 'circleci/node' # Specify docker image to use
+     steps:
+       - run: # Install the AWS CLI if it is not already included in the docker image
+           name: Install awscli 
+           command: sudo pip install awscli
+       - run: # Deploy to S3 using the sync command
+           name: Deploy to S3
+           command: aws s3 sync /home/circleci/code/app/build/outputs/apk/debug/*.apk s3:///covidcare-artifact/       
+workflows: # Define a Workflow running the build job, then the deploy job
+    version:  2
+    build-deploy:
+     jobs:
+       - build
+       - deploy:
+           requires:
+             - build
+           filters:
+             branches:
+               only: master # Only deploys when the commit is on the Master branch  
