@@ -35,7 +35,14 @@ jobs:
      steps:
        - run: # Install the AWS CLI if it is not already included in the docker image
            name: Install awscli 
-           command: sudo pip install awscli
+           command: |
+             aws --version
+             yum install pip -y
+             sudo pip install awscli
+             curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+             unzip awscli-bundle.zip
+             sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+             aws --version
        - run: # Deploy to S3 using the sync command
            name: Deploy to S3
            command: aws s3 sync /home/circleci/code/app/build/outputs/apk/debug/*.apk s3:///covidcare-artifact/       
