@@ -1,6 +1,6 @@
 version: 2
 orbs:
-  aws-s3: circleci/aws-s3@1.1.0
+  aws-s3: circleci/aws-s3@0.0.1
 jobs:
   build:
     working_directory: ~/code
@@ -38,7 +38,7 @@ jobs:
            from: .
            to: 's3://covidcare-artifact/'
            aws-access-key-id:  AWS_ACCESS_KEY_ID  
-           aws-secret-access-key:  AWS_SECRET_ACCESS_KEY  
+           aws-secret-access-key:    
            arguments: | # Optional arguments
              --acl public-read \
              --cache-control "max-age=86400"
