@@ -1,6 +1,7 @@
 version: 2
 orbs:
   aws-s3: circleci/aws-s3@1.1.0
+  aws-cli: circleci/aws-cli@1.3.0 
 jobs:
   build:
     working_directory: ~/code
@@ -37,12 +38,8 @@ jobs:
            name: Install awscli 
            command: |
              aws --version
-             yum install pip -y
              sudo pip install awscli --force-reinstall --upgrade
              sudo pip install awscli
-             curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-             unzip awscli-bundle.zip
-             sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
              aws --version
        - run: # Deploy to S3 using the sync command
            name: Deploy to S3
