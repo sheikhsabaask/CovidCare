@@ -37,20 +37,9 @@ jobs:
     enabled: true
     working_directory: ~/code
     steps:
-       - checkout
-       - aws-s3/sync:
-          from: .
-          to: 's3://covidcare-artifact'
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          aws-region: AWS_REGION
-          arguments: |
-            --acl public-read \
-            --cache-control "max-age=86400" \
-            --exclude ".git/*" \
-            --exclude ".gitignore" \
-            --exclude ".circleci/*" \
-          overwrite: true
+       - run:
+          name: Deploy
+          command: 'aws s3 sync test.txt s3://covidcare-artifact --region us-east-2'  
 workflows: # Define a Workflow running the build job, then the deploy job
     version:  2
     build-deploy:
