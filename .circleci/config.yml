@@ -14,10 +14,6 @@ jobs:
       - checkout
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - app/build/outputs/apk/
       - run:
          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
          command: sudo chmod +x ./gradlew
@@ -34,6 +30,10 @@ jobs:
       - store_artifacts: # storing artifact  
           path: app/build/outputs/apk/
           destination: apks/
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - app/build/outputs/apk/
           # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
   deploy:
     machine:
