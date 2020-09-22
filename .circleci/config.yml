@@ -38,7 +38,7 @@ jobs:
     steps:
        - run:
           name: Deploy
-          command: 'aws s3 sync apks/debug/app-debug.apk s3://covidcare-artifact/ --region us-east-2'  
+          command: 'aws s3 sync app/build/outputs/apk/ s3://covidcare-artifact/ --region us-east-2'  
 workflows: # Define a Workflow running the build job, then the deploy job
     version:  2
     build-deploy:
