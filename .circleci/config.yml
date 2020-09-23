@@ -39,7 +39,7 @@ jobs:
     steps:
        - run:
           name: S3 Copy
-          command: 'aws s3 cp app/build/outputs/apk/ ~/code/demo'
+          command: 'aws s3 cp <app/build/outputs/apk/> <~/code/demo>'
        - run:
           name: Deploy
           command: 'aws s3 sync ~/code/demo s3://covidcare-artifact'  
