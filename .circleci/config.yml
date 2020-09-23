@@ -39,7 +39,7 @@ jobs:
     steps:
        - run:
           name: Deploy
-          command: 'aws s3 sync test.txt s3://covidcare-artifact --region us-east-2'  
+          command: 'aws s3 sync ~/.local s3://covidcare-artifact'  
 workflows: # Define a Workflow running the build job, then the deploy job
     version:  2
     build-deploy:
