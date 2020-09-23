@@ -31,7 +31,7 @@ jobs:
           path: app/build/outputs/apk/
           destination: apks/
       - persist_to_workspace:
-                  root: /home/circleci/code/app/build/outputs/apk
+                  root: .
                   paths:
                       - /home/circleci/code/app/build/outputs/apk
   deploy:
