@@ -33,7 +33,7 @@ jobs:
       - persist_to_workspace:
                   root: .
                   paths:
-                      - /home/circleci/code/app/build/outputs/apk
+                      - .
   deploy:
     machine:
       image: ubuntu-1604:201903-01 
