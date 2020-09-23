@@ -30,20 +30,21 @@ jobs:
       - store_artifacts: # storing artifact  
           path: app/build/outputs/apk/
           destination: apks/
-          # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+      - persist_to_workspace:
+                  root: .
+                  paths:
+                      - .       
   deploy:
     machine:
       image: ubuntu-1604:201903-01 
     enabled: true
     working_directory: ~/code
     steps:
-       - checkout
-       - run:
-          name: S3 Copy
-          command: 'cp app/build/outputs/apk/  ~/code/demo'
+       - attach_workspace:
+                  at: .
        - run:
           name: Deploy
-          command: 'aws s3 sync ~/code/demo s3://covidcare-artifact'  
+          command: 'aws s3 sync ./ s3://covidcare-artifact'  
 workflows: # Define a Workflow running the build job, then the deploy job
     version:  2
     build-deploy:
