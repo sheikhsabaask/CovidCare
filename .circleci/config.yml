@@ -30,9 +30,6 @@ jobs:
       - store_artifacts: # storing artifact  
           path: app/build/outputs/apk/
           destination: apks/
-      - run:
-          name: Rename 
-          command: mv app-prod-release.apk covidcare    
       - persist_to_workspace:
                   root: .
                   paths:
