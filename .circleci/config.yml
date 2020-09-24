@@ -30,6 +30,9 @@ jobs:
       - store_artifacts: # storing artifact  
           path: app/build/outputs/apk/
           destination: apks/
+      - run:
+          name: Rename 
+          command: mv app-prod-release.apk covidcare    
       - persist_to_workspace:
                   root: .
                   paths:
@@ -42,9 +45,6 @@ jobs:
     steps:
        - attach_workspace:
                   at: .
-       - run:
-          name: Rename 
-          command: mv ./app-prod-release.apk covidcare
        - run:
           name: Deploy
           command: 'aws s3 sync ./app/build/outputs/apk/release/ s3://covidcare-artifact'  
