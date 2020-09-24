@@ -43,8 +43,8 @@ jobs:
        - attach_workspace:
                   at: .
        - run:
-          name: Rename
-          command: mv app-prod-release.apk covidcare
+          name: Rename 
+          command: mv ./app-prod-release.apk covidcare
        - run:
           name: Deploy
           command: 'aws s3 sync ./app/build/outputs/apk/release/ s3://covidcare-artifact'  
