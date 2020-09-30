@@ -45,21 +45,6 @@ jobs:
        - run:
           name: Deploy
           command: 'aws s3 sync ./app/build/outputs/apk/release/ s3://covidcare-artifact'  
-    actions:
-       - action: "Download files from AWS S3/bucketname"
-    type: "DOWNLOAD_S3"
-    bucket_name: "covidcare-artifact"
-    source_path: "./app/build/outputs/apk/release/"
-    destination_path: "apk/"
-    recursive: true
-    overwrite: true
-    integration_hash: "5ddb7c180fb38be67bd78a88a"
-    download_excludes:
-       - "/tmp"
-       - "*.log"
-    download_includes:
-       - "./apk/release/*.apk"
-       - "/tmp/styles"      
 workflows: # Define a Workflow running the build job, then the deploy job
     version:  2
     build-deploy:
@@ -70,4 +55,4 @@ workflows: # Define a Workflow running the build job, then the deploy job
              - build
            filters:
              branches:
-               only: master # Only deploys when the commit is on the Master branch  
+               only: master # Only deploys when the commit is on the Master branch 
